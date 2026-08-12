@@ -41,3 +41,7 @@ const signUp = async (req,res) =>{
         message : "Account created succesfully"
     })
 }
+
+module.exports = {
+    signUp
+}
