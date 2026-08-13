@@ -28,11 +28,11 @@ const signUp = async (req,res) =>{
     const encryptPass = await bcrypt.hash(password, 7)
 
     const user = await User({
-        name : name,
-        email : email,
+        name,
+        email,
         password : encryptPass,
-        age : age,
-        city : city
+        age,
+        city
     })
 
     await user.save()
