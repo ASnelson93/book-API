@@ -42,6 +42,40 @@ const signUp = async (req,res) =>{
     })
 }
 
+const login = async (req,res)=> {
+    const {email, password} = req.body
+
+    if(!email || !password){
+        return res.status(400).send({
+            message: "Invalid Input"
+        })
+    }
+
+    const existingUser = await User.findOne({email: email})
+
+    if(!existingUser){
+        res.status(400).send({
+            message: "User does not exist"
+        })
+    }    
+
+    let passwordCheck = await bcrypt.compare(password, existingUser.password)
+
+    if(!passwordCheck){
+        return res.status(400).send({
+            message: "Invalid password"
+        })
+    }
+
+    const token = jwt.sign(existingUser.email , process.env.SECRET_KEY)
+
+    return res.status(200).send({
+        message : "Login successful"
+    })
+
+}
+
 module.exports = {
-    signUp
+    signUp,
+    login
 }
