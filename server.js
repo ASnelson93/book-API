@@ -14,11 +14,13 @@ dotenv.config()
 app.use("/api/auth", userRoute)
 app.use("/api", bookRoute)
 
-async function connectDB(){
-    await mongoose.connect(process.env.MONGO_URL)
-    .then(()=>{
-        console.log("connected successfully")
-    })
+async function connectDB() {
+    try {
+        await mongoose.connect(process.env.MONGO_URL);
+        console.log("Connected successfully");
+    } catch (error) {
+        console.log("Database connection failed:", error.message);
+    }
 }
 
 connectDB()
