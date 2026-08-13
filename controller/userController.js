@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt")
 const User = require("../models/userModel")
-const jwt = ("jsonwebtoken")
+const jwt = require("jsonwebtoken")
 
 const signUp = async (req,res) =>{
     const {name, email, password, age, city} = req.body
@@ -67,10 +67,11 @@ const login = async (req,res)=> {
         })
     }
 
-    const token = jwt.sign(existingUser.email , process.env.SECRET_KEY)
+    const token = jwt.sign(existingUser.email, process.env.SECRET_KEY)
 
     return res.status(200).send({
-        message : "Login successful"
+        message : "Login successful",
+        token : token
     })
 
 }

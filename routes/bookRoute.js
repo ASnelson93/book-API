@@ -6,8 +6,8 @@ const bookRoute = express.Router()
 
 bookRoute.post("/books",autMiddleware, newBook)
 bookRoute.get("/books",autMiddleware, allBooks)
-bookRoute.get("/books",autMiddleware, findBook)
-bookRoute.put("/books",autMiddleware, updateBook)
-bookRoute.delete("/books",autMiddleware, deleteBook)
+bookRoute.get("/books/:id",autMiddleware, findBook)
+bookRoute.put("/books/:id",autMiddleware, updateBook)
+bookRoute.delete("/books/:id",autMiddleware, deleteBook)
 
 module.exports = bookRoute
